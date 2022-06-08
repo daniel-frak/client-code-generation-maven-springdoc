@@ -80,4 +80,60 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- Client code generation -->
+    <profiles>
+        <profile>
+            <id>angular</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springdoc</groupId>
+                        <artifactId>springdoc-openapi-maven-plugin</artifactId>
+                        <version>1.4</version>
+                        <executions>
+                            <execution>
+                                <id>openapi-file-generation</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.openapitools</groupId>
+                        <artifactId>openapi-generator-maven-plugin</artifactId>
+                        <version>6.0.0</version>
+                        <executions>
+                            <execution>
+                                <id>angular-client-code-generation</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <inputSpec>${project.basedir}/target/openapi.json</inputSpec>
+                                    <output>${project.build.directory}/generated-sources/angular</output>
+
+                                    <generatorName>typescript-angular</generatorName>
+                                    <!--
+                                        Use this option to dump the configuration help for the specified generator
+                                        instead of generating sources:
+                                        <configHelp>true</configHelp>
+                                    -->
+
+                                    <configOptions>
+                                        <!--
+                                            Put generator-specific parameters here, e.g. for typescript-angular:
+                                            <apiModulePrefix>Backend</apiModulePrefix>
+                                         -->
+                                    </configOptions>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

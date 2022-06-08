@@ -41,7 +41,3 @@ $ mvn clean verify -P angular
 ## Screenshots
 
 ![Swagger UI documentation](readme-images/screenshot.png)
-
-## License
-
-This project is licensed under the MIT License - see the [license details](https://opensource.org/licenses/MIT).
